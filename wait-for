@@ -25,7 +25,7 @@
 VERSION="2.2.4"
 
 set -- "$@" -- "$TIMEOUT" "$QUIET" "$PROTOCOL" "$HOST" "$PORT" "$result"
-TIMEOUT=15
+TIMEOUT=5
 QUIET=0
 # The protocol to make the request with, either "tcp" or "http"
 PROTOCOL="tcp"
@@ -98,7 +98,7 @@ wait_for() {
     fi
 
     if [ $TIMEOUT -ne 0 -a $(date +%s) -ge $TIMEOUT_END ]; then
-      echo "Operation timed out" >&2
+      echo "wait-for: Operation timed out [$PROTOCOL $HOST $PORT] TIMEOUT: $TIMEOUT" >&2
       exit 1
     fi
 
